@@ -24,10 +24,12 @@
           </ul>
         </div>
       </nav>
-    <div class="jumbotron-fluid col text-center">
+    <div class="jumbotron-fluid col text-center" id=mainTextArea>
+        <div id="hiddenOncePlayed">
         <h1>JavaScript Code Quiz</h1>
         <p class="lead ml-6 mr-6">This is a timed multiple choice quiz. If you are quick on the mouse you may just make it on the <a href="#leaderModal" data-toggle="modal" data-target="#leaderModal">Leaderboard</a>!</p>
-        <a class="btn btn-lg btn-primary" href="#" role="button">Start Quiz</a>
+        <a class="btn btn-lg btn-primary" href="#" role="button" id=startQuizButton>Start Quiz</a>
+        </div>
     </div>
     <!-- Modal Start-->
     <div class="modal fade" id="leaderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -43,7 +45,6 @@
             Filler Text for Modal add grid here
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary mr-auto">Save Changes</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
           </div>

@@ -10,3 +10,9 @@
 .mr-6{
     margin-right: 5rem !important;
 }
+/* override default Bootstrap list style with traditional alphabetical style */
+.list-group{
+    list-style: upper-alpha;
+    margin-left: 3rem !important;
+    margin-right:3rem !important;
+}
