@@ -1,25 +1,35 @@
 $(document).ready(function(){
     var questions = [];
     var qAndA = [
-        "question  1",
-        "answer 1",
-        "answer 2",
-        "answer 3",
-        "answer 4",
-        "question 2",
-        "answer 11",
-        "answer 22",
-        "answer 33",
-        "answer 44",
+        "question 1", "answer 1", "answer 2", "answer 3", "answer 4",
+        "question 2", "answer 1", "answer 2", "answer 3", "answer 4",
+        "question 3", "answer 1", "answer 2", "answer 3", "answer 4",
+        "question 4", "answer 1", "answer 2", "answer 3", "answer 4",
+        "question 5", "answer 1", "answer 2", "answer 3", "answer 4",
+        "question 6", "answer 1", "answer 2", "answer 3", "answer 4",
+        "question 7", "answer 1", "answer 2", "answer 3", "answer 4",
+        "question 8", "answer 1", "answer 2", "answer 3", "answer 4",
+        "question 9", "answer 1", "answer 2", "answer 3", "answer 4",
+        "question 10", "answer 1", "answer 2", "answer 3", "answer 4",
+        "question 11", "answer 1", "answer 2", "answer 3", "answer 4",
+        "question 12", "answer 1", "answer 2", "answer 3", "answer 4",
+        "question 13", "answer 1", "answer 2", "answer 3", "answer 4",
+        "question 14", "answer 1", "answer 2", "answer 3", "answer 4",
+        "question 15", "answer 1", "answer 2", "answer 3", "answer 4",
+        "question 16", "answer 1", "answer 2", "answer 3", "answer 4",
+        "question 17", "answer 1", "answer 2", "answer 3", "answer 4",
+        "question 18", "answer 1", "answer 2", "answer 3", "answer 4",
+        "question 19", "answer 1", "answer 2", "answer 3", "answer 4",
+        "question 20", "answer 1", "answer 2", "answer 3", "answer 4",
     ];
 
-    
-        function Question(question, firstQuestion, secondQuestion, thirdQuestion, fourthQuestion){
+        //using Question object to more easily organize information, better datastructure
+        function Question(question, firstAnswer, secondAnswer, thirdAnswer, fourthAnswer){
             this.question = question;
-            this.firstQuestion = firstQuestion;
-            this.secondQuestion = secondQuestion;
-            this.thirdQuestion = thirdQuestion;
-            this.fourthQuestion = fourthQuestion;
+            this.firstAnswer = firstAnswer;
+            this.secondAnswer = secondAnswer;
+            this.thirdAnswer = thirdAnswer;
+            this.fourthAnswer = fourthAnswer;
         }
         // added toString for easier debugging
         Question.prototype.toString = function questionToString(){
@@ -65,9 +75,12 @@ $(document).ready(function(){
     });
 
     function populateQuiz(){
-        
-        // get question and randomize order that answers are displayed
-       
+        //random question from array of questions that way students can't cheat as easily, hard coded for 20 questions
+        let randomQ = Math.floor(Math.random() * 19);
+        $('#firstElement').text(questions[randomQ].firstAnswer);
+        $('#secondElement').text(questions[randomQ].secondAnswer);
+        $('#thirdElement').text(questions[randomQ].thirdAnswer);
+        $('#fourthElement').text(questions[randomQ].fourthAnswer);
     }
 
 });
