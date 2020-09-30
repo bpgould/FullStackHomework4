@@ -62,9 +62,7 @@ $(document).ready(function(){
         for(i=0; i<answerKey.length; i++){
             answers[i].isCorrect = answerKey[i];
         }
-        console.log("answers ",answers.length," answerkey ", answerKey.length);
 
-        console.log(answers);
         //using Question object to more easily organize information, better datastructure
         function QuestionSet(question, firstAnswer, secondAnswer, thirdAnswer, fourthAnswer){
             this.question = question;
@@ -84,8 +82,6 @@ $(document).ready(function(){
         questions[counter]=x;
         counter++;
     }
-    console.log(questions);
-
     
     $("#startQuizButton").click(function(){
         $("#hiddenOncePlayed").css('display','none');
@@ -122,14 +118,26 @@ $(document).ready(function(){
         populateQuiz();
     });
 
+    var chosenQuestions = [];
     function populateQuiz(){
         //random question from array of questions that way students can't cheat as easily, hard coded for 20 questions
-        let randomQ = Math.floor(Math.random() * 19);
+        let randomQ = giveRandomQuestion();
+        chosenQuestions.push(randomQ);
+
+        console.log(randomQ);
+
         $('#firstElement').text(questions[randomQ].firstAnswer);
         $('#secondElement').text(questions[randomQ].secondAnswer);
         $('#thirdElement').text(questions[randomQ].thirdAnswer);
         $('#fourthElement').text(questions[randomQ].fourthAnswer);
 
+    }
+    function giveRandomQuestion(){
+        let x = Math.floor(Math.random() * 19);
+        while(chosenQuestions.includes(x)===true){
+            x = Math.floor(Math.random() * 19);
+        }
+        return x;
     }
     
     var startTime;
