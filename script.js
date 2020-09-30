@@ -50,28 +50,18 @@ $(document).ready(function(){
             this.isCorrect = isCorrect;
             this.stringContent = stringContent;
         }
-        // Object.defineProperties(Answer.prototype,{
-        //     setCorrect:{
-        //         get: function(){return this.isCorrect;},
-        //         set: function(val){this.isCorrect = val;}
-        //     }
-        // });
-
-        // Object.defineProperty(Answer,'isCorrect',{
-        //     set: function(x){this.isCorrect = x;}
-        // });
-
-        counter0 = 1;
+        
+        var counterZ = 1;
         for(i=1; i<qAndA.length; i++){
             if(i%5!==0){
                 let x = new Answer(false, qAndA[i]);
-                answers[counter0-1] = x;
-                counter++;
+                answers[counterZ-1] = x;
+                counterZ++;
             }
         }
-        // for(i=0; i<answerKey.length; i++){
-        //     answers[i].isCorrect = answerKey[i];
-        // }
+        for(i=0; i<answerKey.length; i++){
+            answers[i].isCorrect = answerKey[i];
+        }
         console.log("answers ",answers.length," answerkey ", answerKey.length);
 
         console.log(answers);
@@ -90,10 +80,11 @@ $(document).ready(function(){
     
     var counter = 0;
     for(i=0;i<qAndA.length-4;i+=5){
-        let x = new QuestionSet(qAndA[i],qAndA[i+1],qAndA[i+2],qAndA[i+3],qAndA[i+4]);
+        let x = new QuestionSet(qAndA[i],answers[i],answers[i+1],answers[i+2],answers[i+3]);
         questions[counter]=x;
         counter++;
     }
+    console.log(questions);
 
     
     $("#startQuizButton").click(function(){
