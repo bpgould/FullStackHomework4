@@ -70,7 +70,8 @@ $(document).ready(function(){
         $('#listContent').append(
             '<li id="fourthElement"></li>'
         ).addClass('list-group-item');
-
+        
+        startTimer();
         populateQuiz();
     });
 
@@ -82,5 +83,42 @@ $(document).ready(function(){
         $('#thirdElement').text(questions[randomQ].thirdAnswer);
         $('#fourthElement').text(questions[randomQ].fourthAnswer);
     }
-
+    
+        var startTime;
+        var updatedTime;
+        var difference;
+        var tInterval;
+        var savedTime;
+        var paused = 0;
+        var running = 0;
+    
+    function startTimer(){
+        if(!running){
+        startTime = new Date().getTime();
+        tInterval = setInterval(getShowTime, 1000);
+        paused = 0;
+        running =1;
+        }
+    }
+    function pauseTimer(){
+        if (!difference){
+          // if timer never started, don't allow pause button to do anything
+        } 
+        else if (!paused){
+          clearInterval(tInterval);
+          savedTime = difference;
+          paused = 1;
+          running = 0;
+        }
+        else{
+           startTimer(); 
+        }
+    }
+    function resetTimer(){
+        clearInterval(tInterval);
+        savedTime = 0;
+        difference = 0;
+        paused = 0;
+        running = 0;
+    }
 });
