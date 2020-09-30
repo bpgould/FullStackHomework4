@@ -121,9 +121,10 @@ $(document).ready(function(){
             '<li id="fourthElement" class="list-group-item"></li>'
         );
         $('#listContent').append(
-            '<li id="submit" class="list-group-item">Submit</li>'
+            '<li id="submit" class="list-group-item">Submit Answer</li>'
         );
         
+        $('#submit').css('font-weight','bold');
         startTimer();
         populateQuiz();
     });
@@ -174,6 +175,6 @@ $(document).ready(function(){
         let seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
         $('#timer').css('color','red');
-        $('#timer').text(hours + ':' + minutes + ':' + seconds);
+        $('#timer').text(hours + ' hours ' + minutes + ' minutes ' + seconds + ' seconds ');
       }
 });
