@@ -120,6 +120,9 @@ $(document).ready(function(){
         $('#listContent').append(
             '<li id="fourthElement" class="list-group-item"></li>'
         );
+        $('#listContent').append(
+            '<li id="submit" class="list-group-item">Submit</li>'
+        );
         
         startTimer();
         populateQuiz();
@@ -170,6 +173,7 @@ $(document).ready(function(){
         let minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
         let seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
+        $('#timer').css('color','red');
         $('#timer').text(hours + ':' + minutes + ':' + seconds);
       }
 });
