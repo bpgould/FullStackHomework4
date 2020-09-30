@@ -11,6 +11,7 @@
     margin-right: 5rem !important;
 }
 /* override default Bootstrap list style with traditional alphabetical style */
+/* need to fix to add letters via upper-alpha */
 .list-group{
     list-style: upper-alpha;
     margin-left: 3rem !important;

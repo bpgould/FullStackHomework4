@@ -92,37 +92,47 @@ $(document).ready(function(){
             id: 'quizContent'
         }).appendTo('#mainTextArea');
 
-        jQuery('<span/>',{
+        jQuery('<div/>',{
             id: 'timer'
+        }).appendTo('#quizContent');
+
+        jQuery('<div/>',{
+            id: 'questionSpace'
         }).appendTo('#quizContent');
 
         jQuery('<ul/>',{
             id: 'listContent',
             class: 'list-group'
         }).appendTo('#quizContent');
-        
-        $('#listContent').append(
-            '<li id="firstElement"></li>'
-        ).addClass('list-group-item');
 
         $('#listContent').append(
-            '<li id="secondElement"></li>'
-        ).addClass('list-group-item');
+            '<li id="firstElement" class="list-group-item"></li>'
+        );
 
         $('#listContent').append(
-            '<li id="thirdElement"></li>'
-        ).addClass('list-group-item');
+            '<li id="secondElement" class="list-group-item"></li>'
+        );
 
         $('#listContent').append(
-            '<li id="fourthElement"></li>'
-        ).addClass('list-group-item');
+            '<li id="thirdElement" class="list-group-item"></li>'
+        );
+
+        $('#listContent').append(
+            '<li id="fourthElement" class="list-group-item"></li>'
+        );
         
         startTimer();
         populateQuiz();
     });
 
-    $('#firstElement','#secondElement','#thirdElement','#fourthElement').click(function(){
-        $(this).toggleClass('list-group-item', 'list-group-item active ');
+    $(document).on('click','#firstElement, #secondElement, #thirdElement, #fourthElement', function(e){
+        if($(this).attr('class')==='list-group-item active'){
+            $(this).removeClass('list-group-item active');
+            $(this).addClass('list-group-item');
+        }
+        else{
+        $(this).toggleClass('list-group-item active', true);
+        }
     });
 
     var chosenQuestions = [];
@@ -131,11 +141,7 @@ $(document).ready(function(){
         let randomQ = giveRandomQuestion();
         chosenQuestions.push(randomQ);
 
-        // console.log(randomQ);
-        // console.log(chosenQuestions);
-        // console.log(questions);
-        console.log(answers);
-
+        $('#questionSpace').text(questions[randomQ].question);
         $('#firstElement').text(questions[randomQ].firstAnswer.stringContent);
         $('#secondElement').text(questions[randomQ].secondAnswer.stringContent);
         $('#thirdElement').text(questions[randomQ].thirdAnswer.stringContent);
