@@ -52,6 +52,7 @@ $(document).ready(function(){
         }
         
         var counterZ = 1;
+        
         for(i=1; i<qAndA.length; i++){
             if(i%5!==0){
                 let x = new Answer(false, qAndA[i]);
@@ -76,9 +77,11 @@ $(document).ready(function(){
             return this.question;
         }
     
+    //tricky loop indexing
     var counter = 0;
     for(i=0;i<qAndA.length-4;i+=5){
-        let x = new QuestionSet(qAndA[i],answers[i],answers[i+1],answers[i+2],answers[i+3]);
+        let y = counter * 4;
+        let x = new QuestionSet(qAndA[i],answers[y],answers[y+1],answers[y+2],answers[y+3]);
         questions[counter]=x;
         counter++;
     }
@@ -118,18 +121,25 @@ $(document).ready(function(){
         populateQuiz();
     });
 
+    $('#firstElement','#secondElement','#thirdElement','#fourthElement').click(function(){
+        $(this).toggleClass('list-group-item', 'list-group-item active ');
+    });
+
     var chosenQuestions = [];
     function populateQuiz(){
         //random question from array of questions that way students can't cheat as easily, hard coded for 20 questions
         let randomQ = giveRandomQuestion();
         chosenQuestions.push(randomQ);
 
-        console.log(randomQ);
+        // console.log(randomQ);
+        // console.log(chosenQuestions);
+        // console.log(questions);
+        console.log(answers);
 
-        $('#firstElement').text(questions[randomQ].firstAnswer);
-        $('#secondElement').text(questions[randomQ].secondAnswer);
-        $('#thirdElement').text(questions[randomQ].thirdAnswer);
-        $('#fourthElement').text(questions[randomQ].fourthAnswer);
+        $('#firstElement').text(questions[randomQ].firstAnswer.stringContent);
+        $('#secondElement').text(questions[randomQ].secondAnswer.stringContent);
+        $('#thirdElement').text(questions[randomQ].thirdAnswer.stringContent);
+        $('#fourthElement').text(questions[randomQ].fourthAnswer.stringContent);
 
     }
     function giveRandomQuestion(){
