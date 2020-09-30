@@ -1,6 +1,6 @@
 /* centers text in middle 50% of page */
 .jumbotron-fluid{
-    padding-top: 25%;
+    padding-top: 20%;
     padding-bottom: 25%;
 }
 /* I needed more margin that what was natively available in Bootstrap */
