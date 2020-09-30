@@ -125,7 +125,7 @@ $(document).ready(function(){
         populateQuiz();
     });
 
-    $(document).on('click','#firstElement, #secondElement, #thirdElement, #fourthElement', function(e){
+    $(document).on('click','#firstElement, #secondElement, #thirdElement, #fourthElement', function(){
         if($(this).attr('class')==='list-group-item active'){
             $(this).removeClass('list-group-item active');
             $(this).addClass('list-group-item');
@@ -166,7 +166,6 @@ $(document).ready(function(){
         let updatedTime = new Date();
         let difference =  updatedTime - startTime;
         
-        // var days = Math.floor(difference / (1000 * 60 * 60 * 24));
         let hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         let minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
         let seconds = Math.floor((difference % (1000 * 60)) / 1000);
