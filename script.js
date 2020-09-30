@@ -45,10 +45,14 @@ $(document).ready(function(){
 
     
     $("#startQuizButton").click(function(){
-        $("#hiddenOncePlayed").css('display','none')
+        $("#hiddenOncePlayed").css('display','none');
         jQuery('<div/>',{
             id: 'quizContent'
         }).appendTo('#mainTextArea');
+
+        jQuery('<span/>',{
+            id: 'timer'
+        }).appendTo('#quizContent');
 
         jQuery('<ul/>',{
             id: 'listContent',
@@ -82,43 +86,33 @@ $(document).ready(function(){
         $('#secondElement').text(questions[randomQ].secondAnswer);
         $('#thirdElement').text(questions[randomQ].thirdAnswer);
         $('#fourthElement').text(questions[randomQ].fourthAnswer);
+
+        
     }
     
         var startTime;
         var updatedTime;
         var difference;
         var tInterval;
-        var savedTime;
-        var paused = 0;
-        var running = 0;
+        var hours;
+        var minutes;
+        var seconds;
     
     function startTimer(){
-        if(!running){
-        startTime = new Date().getTime();
+        startTime = new Date();
         tInterval = setInterval(getShowTime, 1000);
-        paused = 0;
-        running =1;
-        }
     }
-    function pauseTimer(){
-        if (!difference){
-          // if timer never started, don't allow pause button to do anything
-        } 
-        else if (!paused){
-          clearInterval(tInterval);
-          savedTime = difference;
-          paused = 1;
-          running = 0;
-        }
-        else{
-           startTimer(); 
-        }
-    }
-    function resetTimer(){
-        clearInterval(tInterval);
-        savedTime = 0;
-        difference = 0;
-        paused = 0;
-        running = 0;
-    }
+
+    function getShowTime(){
+        updatedTime = new Date();
+        
+        difference =  updatedTime - startTime;
+        
+        // var days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        $('#timer').text(hours + ':' + minutes + ':' + seconds);
+      }
 });
