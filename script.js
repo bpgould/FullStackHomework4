@@ -1,5 +1,6 @@
 $(document).ready(function(){
     var questions = [];
+    var answers = [];
     var qAndA = [
         "question 1", "answer 1", "answer 2", "answer 3", "answer 4",
         "question 2", "answer 1", "answer 2", "answer 3", "answer 4",
@@ -20,11 +21,62 @@ $(document).ready(function(){
         "question 17", "answer 1", "answer 2", "answer 3", "answer 4",
         "question 18", "answer 1", "answer 2", "answer 3", "answer 4",
         "question 19", "answer 1", "answer 2", "answer 3", "answer 4",
-        "question 20", "answer 1", "answer 2", "answer 3", "answer 4",
+        "question 20", "answer 1", "answer 2", "answer 3", "answer 4"
     ];
+    var answerKey = [
+        true, false, false, false,
+        false, true, false, false,
+        false, false, true, false,
+        false, false, false, true,
+        true, false, false, false,
+        false, true, false, false,
+        false, false, true, false,
+        false, false, false, true,
+        true, false, false, false,
+        false, true, false, false,
+        false, false, true, false,
+        false, false, false, true,
+        true, false, false, false,
+        false, true, false, false,
+        false, false, true, false,
+        false, false, false, true,
+        true, false, false, false,
+        false, true, false, false,
+        false, false, true, false,
+        false, false, false, true
+    ];
+        //currently missing structs from C++ :/
+        function Answer(isCorrect, stringContent){
+            this.isCorrect = isCorrect;
+            this.stringContent = stringContent;
+        }
+        // Object.defineProperties(Answer.prototype,{
+        //     setCorrect:{
+        //         get: function(){return this.isCorrect;},
+        //         set: function(val){this.isCorrect = val;}
+        //     }
+        // });
 
+        // Object.defineProperty(Answer,'isCorrect',{
+        //     set: function(x){this.isCorrect = x;}
+        // });
+
+        counter0 = 1;
+        for(i=1; i<qAndA.length; i++){
+            if(i%5!==0){
+                let x = new Answer(false, qAndA[i]);
+                answers[counter0-1] = x;
+                counter++;
+            }
+        }
+        // for(i=0; i<answerKey.length; i++){
+        //     answers[i].isCorrect = answerKey[i];
+        // }
+        console.log("answers ",answers.length," answerkey ", answerKey.length);
+
+        console.log(answers);
         //using Question object to more easily organize information, better datastructure
-        function Question(question, firstAnswer, secondAnswer, thirdAnswer, fourthAnswer){
+        function QuestionSet(question, firstAnswer, secondAnswer, thirdAnswer, fourthAnswer){
             this.question = question;
             this.firstAnswer = firstAnswer;
             this.secondAnswer = secondAnswer;
@@ -32,13 +84,13 @@ $(document).ready(function(){
             this.fourthAnswer = fourthAnswer;
         }
         // added toString for easier debugging
-        Question.prototype.toString = function questionToString(){
+        QuestionSet.prototype.toString = function questionToString(){
             return this.question;
         }
     
     var counter = 0;
     for(i=0;i<qAndA.length-4;i+=5){
-        let x = new Question(qAndA[i],qAndA[i+1],qAndA[i+2],qAndA[i+3],qAndA[i+4]);
+        let x = new QuestionSet(qAndA[i],qAndA[i+1],qAndA[i+2],qAndA[i+3],qAndA[i+4]);
         questions[counter]=x;
         counter++;
     }
@@ -87,31 +139,22 @@ $(document).ready(function(){
         $('#thirdElement').text(questions[randomQ].thirdAnswer);
         $('#fourthElement').text(questions[randomQ].fourthAnswer);
 
-        
     }
     
-        var startTime;
-        var updatedTime;
-        var difference;
-        var tInterval;
-        var hours;
-        var minutes;
-        var seconds;
-    
+    var startTime;
     function startTimer(){
         startTime = new Date();
-        tInterval = setInterval(getShowTime, 1000);
+        setInterval(getShowTime, 1000);
     }
 
     function getShowTime(){
-        updatedTime = new Date();
-        
-        difference =  updatedTime - startTime;
+        let updatedTime = new Date();
+        let difference =  updatedTime - startTime;
         
         // var days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((difference % (1000 * 60)) / 1000);
+        let hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        let minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
         $('#timer').text(hours + ':' + minutes + ':' + seconds);
       }
