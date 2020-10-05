@@ -139,7 +139,7 @@ $(document).ready(function(){
         }
         else{
         $(this).toggleClass('list-group-item active', true);
-        //the [0] in the below line took a very long time to figure out, somethimes it works wihtout, please leave!
+        //the [0] in the below line took a very long time to figure out, sometimes it worked wihtout, please leave!
         answerSelected = $(this)[0];
         $('#errorSubmit').remove();
         }
