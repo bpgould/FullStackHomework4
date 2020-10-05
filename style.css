@@ -1,4 +1,4 @@
-/* centers text in middle 50% of page */
+/* centers text in middle 50% of page, changed due to strange appearence on different screen size */
 .jumbotron-fluid{
     padding-top: 15%;
     padding-bottom: 25%;
