@@ -129,13 +129,18 @@ $(document).ready(function(){
         populateQuiz();
     });
 
+    //much easier to track selected answer at click rather than submit
+    var answerSelected;
     $(document).on('click','#firstElement, #secondElement, #thirdElement, #fourthElement', function(){
         if($(this).attr('class')==='list-group-item active'){
+            answerSelected = null;
             $(this).removeClass('list-group-item active');
             $(this).addClass('list-group-item');
         }
         else{
         $(this).toggleClass('list-group-item active', true);
+        //the [0] in the below line took a very long time to figure out, somethimes it works wihtout, please leave!
+        answerSelected = $(this)[0];
         $('#errorSubmit').remove();
         }
     });
@@ -143,6 +148,11 @@ $(document).ready(function(){
     $(document).on('click', '#submit', function(){
         if($('#firstElement, #secondElement, #thirdElement, #fourthElement').hasClass('list-group-item active')){
             //do stuff to log if answer was correct etc or subtract time
+            let gotItCorrect = false;
+            if(checkAnswer(answerSelected)==='correctAnswer'){
+                gotItCorrect = true;
+                console.log("They got it correct");
+            }
         }
         else{
             $('#listContent').append(
@@ -152,11 +162,29 @@ $(document).ready(function(){
         }
     });
 
+    //this function was incredibly difficult to figure out, but I learned a ton about Objects in JS
+    function checkAnswer(answerSelected){
+        let correctText = '';
+        
+        for(i=0;i<Object.keys(questions[randomQ]).length;i++){
+            if((Object.values(questions[randomQ])[i]).isCorrect === true){
+                console.log("value for correctText", (Object.values(questions[randomQ])[i]).stringContent);
+                correctText = (Object.values(questions[randomQ])[i]).stringContent;
+            }
+        }
+        console.log("correctText: ", correctText);       
+        if(answerSelected.textContent === correctText){
+        return 'correctAnswer'
+        }
+        else return 'wrongAnswer';
+    }
 
+    //var used instead of let so that current question object can be accessed in other functions
     var chosenQuestions = [];
+    var randomQ;
     function populateQuiz(){
         //random question from array of questions that way students can't cheat as easily, hard coded for 20 questions
-        let randomQ = giveRandomQuestion();
+        randomQ = giveRandomQuestion();
         chosenQuestions.push(randomQ);
 
         $('#questionSpace').text(questions[randomQ].question);
