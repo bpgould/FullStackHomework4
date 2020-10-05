@@ -136,8 +136,22 @@ $(document).ready(function(){
         }
         else{
         $(this).toggleClass('list-group-item active', true);
+        $('#errorSubmit').remove();
         }
     });
+
+    $(document).on('click', '#submit', function(){
+        if($('#firstElement, #secondElement, #thirdElement, #fourthElement').hasClass('list-group-item active')){
+            //do stuff to log if answer was correct etc or subtract time
+        }
+        else{
+            $('#listContent').append(
+                '<li id="errorSubmit" class="list-group-item">Please Select An Answer!</li>'
+            );
+            $('#errorSubmit').css({'color':'purple', 'font-size':'120%', 'font-weight': 'bold'});
+        }
+    });
+
 
     var chosenQuestions = [];
     function populateQuiz(){
