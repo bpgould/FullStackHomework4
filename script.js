@@ -168,11 +168,9 @@ $(document).ready(function(){
         
         for(i=0;i<Object.keys(questions[randomQ]).length;i++){
             if((Object.values(questions[randomQ])[i]).isCorrect === true){
-                console.log("value for correctText", (Object.values(questions[randomQ])[i]).stringContent);
                 correctText = (Object.values(questions[randomQ])[i]).stringContent;
             }
-        }
-        console.log("correctText: ", correctText);       
+        }    
         if(answerSelected.textContent === correctText){
         return 'correctAnswer'
         }
