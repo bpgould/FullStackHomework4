@@ -153,6 +153,11 @@ $(document).ready(function(){
                 gotItCorrect = true;
                 console.log("They got it correct");
             }
+            else{
+                console.log("wrong");
+            }
+            unselectAnswers();
+            populateQuiz();
         }
         else{
             $('#listContent').append(
@@ -198,6 +203,15 @@ $(document).ready(function(){
             x = Math.floor(Math.random() * 19);
         }
         return x;
+    }
+
+    function unselectAnswers(){
+       //target selected answer and unselect it before first paint of next question
+        
+    //    let idSelected = answerSelected.attr('id');
+    //     $(idSelected).removeClass('list-group-item active');
+    //     $(idSelected).addClass('list-group-item');
+       
     }
     
     var startTime;
