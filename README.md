@@ -6,6 +6,8 @@ and many principles of OOP.
 
 I have added the original directions for reference.
 
+I used https://letsfindcourse.com/technical-questions/javascript-mcq/javascript-mcq-questions for some of the questions used.
+
 I added a css reset file for best practice.
 
 I would like to use multiple threads in the future to add concurrent functions.

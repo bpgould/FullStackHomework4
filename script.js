@@ -2,12 +2,12 @@ $(document).ready(function(){
     var questions = [];
     var answers = [];
     var qAndA = [
-        "question 1", "answer 1", "answer 2", "answer 3", "answer 4",
-        "question 2", "answer 1", "answer 2", "answer 3", "answer 4",
-        "question 3", "answer 1", "answer 2", "answer 3", "answer 4",
-        "question 4", "answer 1", "answer 2", "answer 3", "answer 4",
-        "question 5", "answer 1", "answer 2", "answer 3", "answer 4",
-        "question 6", "answer 1", "answer 2", "answer 3", "answer 4",
+        "Which of the following is not a JavaScript Data Type?", "Undefined", "Number", "Boolean", "Float",
+        "Which company developed JavaScript? ", "Netscape", " Bell Labs", "Sun Microsystems ", "IBM",
+        "Inside which HTML element do we put the JavaScript?", "<script>", "<head>", "<meta>", "<style>",
+        "Which of the following is correct about features of JavaScript?", "It can not Handling dates and time", "JavaScript is a object-based scripting language", "JavaScript is not interpreter based scripting language", "All of the above",
+        "Choose the correct JavaScript syntax to change the content of the following HTML code.", "document.getElement ('letsfindcourse').innerHTML = 'I am a letsfindcourse';", "document.getElementById ('letsfindcourse').innerHTML = 'I am a letsfindcourse';", "document.getId ('letsfindcourse') = 'I am a letsfindcourse';", "document.getElementById ('letsfindcourse').innerHTML = I am a letsfindcourse;",
+        "Which of the following is the correct syntax to display 'Letsfindcourse' in an alert box using JavaScript?", "alert-box('Letsfindcourse');", "confirm('Letsfindcourse');", "msgbox('Letsfindcourse');", "alert('Letsfindcourse');",
         "question 7", "answer 1", "answer 2", "answer 3", "answer 4",
         "question 8", "answer 1", "answer 2", "answer 3", "answer 4",
         "question 9", "answer 1", "answer 2", "answer 3", "answer 4",
@@ -24,12 +24,12 @@ $(document).ready(function(){
         "question 20", "answer 1", "answer 2", "answer 3", "answer 4"
     ];
     var answerKey = [
-        true, false, false, false,
-        false, true, false, false,
-        false, false, true, false,
         false, false, false, true,
         true, false, false, false,
+        true, false, false, false,
         false, true, false, false,
+        false, true, false, false,//question 5
+        false, false, true, false,
         false, false, true, false,
         false, false, false, true,
         true, false, false, false,
@@ -144,8 +144,16 @@ $(document).ready(function(){
         $('#errorSubmit').remove();
         }
     });
-
-    $(document).on('click', '#submit', function(){
+    //TODO: need to unbind from document, cannot get any other binding method to work
+    $(document).on('click','#submit',function(){
+        $(submitFunction());
+    });
+    // $('#textContent').on('click', '#submit', function(){
+    //     $(submitFunction());
+    // });
+    // $('#submit').on('click', submitFunction());
+        
+    function submitFunction(){    
         if($('#firstElement, #secondElement, #thirdElement, #fourthElement').hasClass('list-group-item active')){
             //do stuff to log if answer was correct etc or subtract time
             let gotItCorrect = false;
@@ -165,7 +173,7 @@ $(document).ready(function(){
             );
             $('#errorSubmit').css({'color':'purple', 'font-size':'120%', 'font-weight': 'bold'});
         }
-    });
+    }
 
     //this function was incredibly difficult to figure out, but I learned a ton about Objects in JS
     function checkAnswer(answerSelected){
@@ -187,13 +195,18 @@ $(document).ready(function(){
     var randomQ;
     function populateQuiz(){
         //random question from array of questions that way students can't cheat as easily, hard coded for 20 questions
+        console.log(chosenQuestions); 
         if(chosenQuestions.length<questions.length){
         randomQ = giveRandomQuestion();
         chosenQuestions.push(randomQ);
         }
         else{
-            //all of the questions are finished
-        }       
+            $('#submit').remove();
+            $('#listContent').append(
+                '<li id="endOfQuiz" class="list-group-item">That&#146s all for now!</li>'
+            );
+            $('#endOfQuiz').css({'color':'purple', 'font-size':'120%', 'font-weight': 'bold'});
+        }      
 
         $('#questionSpace').text(questions[randomQ].question);
         $('#firstElement').text(questions[randomQ].firstAnswer.stringContent);
