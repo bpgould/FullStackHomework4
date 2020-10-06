@@ -90,7 +90,8 @@ $(document).ready(function(){
     }
     //Start the quiz button triggers the first painting of a random question with answer choices and event listeners to interact with the quiz taker
     //No reason to load this on the front end HTML since the user may just be checking the leaderboard and not taking the quiz
-    var progressWidth;
+    var progressWidth = 0.0;
+    var percentTracker = 0.0;
     $("#startQuizButton").click(function(){
         $("#hiddenOncePlayed").css('display','none');
         jQuery('<div/>',{
@@ -106,10 +107,13 @@ $(document).ready(function(){
             class: 'progress'
         }).appendTo('#quizContent');//physical indicator of progress
 
-        progressWidth=0;
         $('#progressBar').append("<div class='progress-bar' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width:0%'>0%</div>");
-        // $('.progress-bar').css('width', progressWidth + '%');
-        // $('.progress-bar').text('10%');
+       
+        //The percent tracker can be used later to fill value field in leaderboard
+        jQuery('<div/>',{
+            id: 'percentTracker'
+        }).appendTo('#quizContent');
+        $('#percentTracker').text('Percent: ' + percentTracker + "%").css('color','green');
 
         jQuery('<div/>',{
             id: 'questionSpace'
