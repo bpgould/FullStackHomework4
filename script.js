@@ -90,6 +90,7 @@ $(document).ready(function(){
     }
     //Start the quiz button triggers the first painting of a random question with answer choices and event listeners to interact with the quiz taker
     //No reason to load this on the front end HTML since the user may just be checking the leaderboard and not taking the quiz
+    var progressWidth;
     $("#startQuizButton").click(function(){
         $("#hiddenOncePlayed").css('display','none');
         jQuery('<div/>',{
@@ -105,9 +106,9 @@ $(document).ready(function(){
             class: 'progress'
         }).appendTo('#quizContent');//physical indicator of progress
 
-        var progressWidth=0;
+        progressWidth=0;
         $('#progressBar').append("<div class='progress-bar' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width:0%'>0%</div>");
-        $('.progress-bar').css('width',progressWidth + '%');
+        // $('.progress-bar').css('width', progressWidth + '%');
         // $('.progress-bar').text('10%');
 
         jQuery('<div/>',{
@@ -201,6 +202,7 @@ $(document).ready(function(){
                 // console.log("wrong");
             }
             ifAnAnswerSelectedThenUnselect();
+            moveProgressBar();
             populateQuiz();
         }
         else{
@@ -209,6 +211,13 @@ $(document).ready(function(){
             );
             $('#errorSubmit').css({'color':'purple', 'font-size':'120%', 'font-weight': 'bold'});
         }
+    }
+
+    function moveProgressBar(){
+        progressWidth+=(Math.round((1/questions.length)*1000))/10;
+        progressWidth = parseFloat(progressWidth.toFixed(3));//using toFixed() because if the array changes size it might not be a nice answer
+        $('.progress-bar').css('width', progressWidth + '%');
+        $('.progress-bar').text(progressWidth + '%');
     }
 
     //this function was incredibly difficult to figure out, but I learned a ton about Objects in JS
@@ -273,7 +282,7 @@ $(document).ready(function(){
         let minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
         let seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-        $('#timer').css('color','red');
+        $('#timer').css({'color':'red','font-weight':'bold'});
         $('#timer').text(hours + ' hours ' + minutes + ' minutes ' + seconds + ' seconds ');
       }
 });
