@@ -10,13 +10,15 @@ I used https://letsfindcourse.com/technical-questions/javascript-mcq/javascript-
 
 I added a css reset file for best practice.
 
-I would like to use multiple threads in the future to add concurrent functions.
-
-**I need to add the function to subtract time for missed questions
+I would like to use multiple threads in the future to add concurrent functions -- I would probably re-write the whole thing
+knowing what I know now, I would use different data structures.
 
 I would like to add a pause button that obfuscates the page.
 
-I need to prevent two answers from being able to be chosen due to it causing a bug.
-
-I would like to add a progress bar at the bottom that shows the percentage you have answered
-and you percentage correct.
+I have added many extra features that were not required including: 
+-the questions are randomized every game (and re-seeded)
+-there is a progress bar
+-there is a percentage tracker 
+-I used objects for the question/answer data
+-I used modals for the leaderboard + about pages 
+-the UI is built to handle most, if not all, user errors
