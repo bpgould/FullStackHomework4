@@ -188,7 +188,7 @@ $(document).ready(function(){
             }
         }    
         if(answerSelected.textContent === correctText){
-        return 'correctAnswer'
+        return 'correctAnswer';
         }
         else return 'wrongAnswer';
     }
