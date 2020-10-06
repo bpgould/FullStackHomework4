@@ -1,4 +1,3 @@
-$(document).ready(function(){
     var questions = [];
     var answers = [];
     var qAndA = [
@@ -88,9 +87,12 @@ $(document).ready(function(){
         questions[counter]=x;
         counter++;
     }
+
+$(document).ready(function(){
+    
     //Start the quiz button triggers the first painting of a random question with answer choices and event listeners to interact with the quiz taker
     //No reason to load this on the front end HTML since the user may just be checking the leaderboard and not taking the quiz
-    var progressWidth = 0.0;
+    
     var percentTracker = 0.0;
     $("#startQuizButton").click(function(){
         $("#hiddenOncePlayed").css('display','none');
@@ -235,6 +237,7 @@ $(document).ready(function(){
 
     //double rounding is okay for now, but this should be changed later for best practice
     //do operations and round last to minimize floating point round-off
+    var progressWidth = 0.0;
     function moveProgressBar(){
         progressWidth+=(Math.round((1/questions.length)*1000))/10;
         progressWidth = parseFloat(progressWidth.toFixed(3));//using toFixed() because if the array changes size it might not be a nice answer
@@ -271,6 +274,7 @@ $(document).ready(function(){
         else{
             //this indicates end of the quiz
             pauseTime();
+            
             $('#submit').remove();
             $('#listContent').append(
                 '<li id="endOfQuiz" class="list-group-item">That&#146s all for now!</li>'//wird HTML comma code
@@ -293,8 +297,13 @@ $(document).ready(function(){
         return x;
     }
     //TODO: tried clearInterval, tried with Window.setInterval() and Window.clearInterval(), etc.
+    // var tInterval = setInterval(getShowTime, 1000);
+    //https://www.w3schools.com/jsref/met_win_setinterval.asp
+    
     function pauseTime(){
-        
+        // Window.clearInterval(tInterval);
+        console.log('tInterval: ', tInterval);
+        clearInterval(tInterval);
     }
 
     var addedTime = 0;
@@ -303,9 +312,10 @@ $(document).ready(function(){
     }
     
     var startTime;
+    var tInterval;
     function startTimer(){
         startTime = new Date();
-        setInterval(getShowTime, 1000); //Question: why does it stop working when I use get ShowTime()?
+        tInterval = setInterval(getShowTime, 1000); //Question: why does it stop working when I use get ShowTime()?
     }
 
     function getShowTime(){
