@@ -151,10 +151,10 @@ $(document).ready(function(){
             let gotItCorrect = false;
             if(checkAnswer(answerSelected)==='correctAnswer'){
                 gotItCorrect = true;
-                console.log("They got it correct");
+                // console.log("They got it correct");
             }
             else{
-                console.log("wrong");
+                // console.log("wrong");
             }
             unselectAnswers();
             populateQuiz();
@@ -187,8 +187,13 @@ $(document).ready(function(){
     var randomQ;
     function populateQuiz(){
         //random question from array of questions that way students can't cheat as easily, hard coded for 20 questions
+        if(chosenQuestions.length<questions.length){
         randomQ = giveRandomQuestion();
         chosenQuestions.push(randomQ);
+        }
+        else{
+            //all of the questions are finished
+        }       
 
         $('#questionSpace').text(questions[randomQ].question);
         $('#firstElement').text(questions[randomQ].firstAnswer.stringContent);
@@ -198,10 +203,10 @@ $(document).ready(function(){
 
     }
     function giveRandomQuestion(){
-        let x = Math.floor(Math.random() * 19);
-        while(chosenQuestions.includes(x)===true){
-            x = Math.floor(Math.random() * 19);
-        }
+        let x = Math.floor(Math.random() * 20); 
+            while(chosenQuestions.includes(x)===true){
+                x = Math.floor(Math.random() * 20);  
+            }
         return x;
     }
 
