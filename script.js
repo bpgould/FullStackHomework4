@@ -8,10 +8,10 @@ $(document).ready(function(){
         "Which of the following is correct about features of JavaScript?", "It can not Handling dates and time", "JavaScript is a object-based scripting language", "JavaScript is not interpreter based scripting language", "All of the above",
         "Choose the correct JavaScript syntax to change the content of the following HTML code.", "document.getElement ('letsfindcourse').innerHTML = 'I am a letsfindcourse';", "document.getElementById ('letsfindcourse').innerHTML = 'I am a letsfindcourse';", "document.getId ('letsfindcourse') = 'I am a letsfindcourse';", "document.getElementById ('letsfindcourse').innerHTML = I am a letsfindcourse;",
         "Which of the following is the correct syntax to display 'Letsfindcourse' in an alert box using JavaScript?", "alert-box('Letsfindcourse');", "confirm('Letsfindcourse');", "msgbox('Letsfindcourse');", "alert('Letsfindcourse');",
-        "question 7", "answer 1", "answer 2", "answer 3", "answer 4",
-        "question 8", "answer 1", "answer 2", "answer 3", "answer 4",
-        "question 9", "answer 1", "answer 2", "answer 3", "answer 4",
-        "question 10", "answer 1", "answer 2", "answer 3", "answer 4",
+        "What is the correct syntax for referring to an external script called 'LFC.js'? ", "<script src='LFC.js'>", "<script source='LFC.js'>", "<script ref='LFC.js'>", "<script type='LFC.js'>",
+        "Which of the following is not Javascript frameworks or libraries?", "Polymer", "Meteor", "Cassandra", "jQuery",
+        "Why so JavaScript and Java have similar name? ", "JavaScript is a stripped-down version of Java", "JavaScript's syntax is loosely based on Java's", "They both originated on the island of Java", "None of the above",
+        "What is the original name of JavaScript?", "LiveScript", "EScript", "Mocha", "JavaScript",
         "question 11", "answer 1", "answer 2", "answer 3", "answer 4",
         "question 12", "answer 1", "answer 2", "answer 3", "answer 4",
         "question 13", "answer 1", "answer 2", "answer 3", "answer 4",
@@ -24,35 +24,36 @@ $(document).ready(function(){
         "question 20", "answer 1", "answer 2", "answer 3", "answer 4"
     ];
     var answerKey = [
-        false, false, false, true,
+        false, false, false, true,//question 1
         true, false, false, false,
         true, false, false, false,
         false, true, false, false,
         false, true, false, false,//question 5
         false, false, true, false,
+        true, false, false, false,
+        false, false, true, false,
+        false, true, false, false,
+        false, false, true, false,//question 10
         false, false, true, false,
         false, false, false, true,
         true, false, false, false,
         false, true, false, false,
-        false, false, true, false,
+        false, false, true, false,//question 15
         false, false, false, true,
         true, false, false, false,
         false, true, false, false,
         false, false, true, false,
-        false, false, false, true,
-        true, false, false, false,
-        false, true, false, false,
-        false, false, true, false,
-        false, false, false, true
+        false, false, false, true //question 20
     ];
         //currently missing structs from C++ :/
+        //Answer object constructor -- if the answer is correct/incorrect (boolean) and then the string content of the answer
         function Answer(isCorrect, stringContent){
             this.isCorrect = isCorrect;
             this.stringContent = stringContent;
         }
         
+        //populating Answer objects (data members of QuestionSet)
         var counterZ = 1;
-        
         for(i=1; i<qAndA.length; i++){
             if(i%5!==0){
                 let x = new Answer(false, qAndA[i]);
@@ -64,7 +65,8 @@ $(document).ready(function(){
             answers[i].isCorrect = answerKey[i];
         }
 
-        //using Question object to more easily organize information, better datastructure
+        //using QuestionSet object to more easily organize information, better datastructure, includes Question string and Answer data members
+        //QuestionSet constructor
         function QuestionSet(question, firstAnswer, secondAnswer, thirdAnswer, fourthAnswer){
             this.question = question;
             this.firstAnswer = firstAnswer;
@@ -77,7 +79,8 @@ $(document).ready(function(){
             return this.question;
         }
     
-    //tricky loop indexing
+    //**tricky loop indexing**
+    //populating array of QuestionSets aka the quiz is the array of QuestionSets
     var counter = 0;
     for(i=0;i<qAndA.length-4;i+=5){
         let y = counter * 4;
@@ -85,7 +88,7 @@ $(document).ready(function(){
         questions[counter]=x;
         counter++;
     }
-    
+    //Start the quiz button triggers the first painting of a random question with answer choices and event listeners to interact with the quiz taker
     $("#startQuizButton").click(function(){
         $("#hiddenOncePlayed").css('display','none');
         jQuery('<div/>',{
