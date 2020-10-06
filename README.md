@@ -16,9 +16,9 @@ knowing what I know now, I would use different data structures.
 I would like to add a pause button that obfuscates the page.
 
 I have added many extra features that were not required including:
--the questions are randomized every game (and re-seeded)
--there is a progress bar
--there is a percentage tracker 
--I used objects for the question/answer data
--I used modals for the leaderboard + about pages
--the UI is built to handle most, if not all, user errors
+the questions are randomized every game (and re-seeded),
+there is a progress bar,
+there is a percentage tracker,
+I used objects for the question/answer data,
+I used modals for the leaderboard + about pages,
+and the UI is built to handle most, if not all, user errors
