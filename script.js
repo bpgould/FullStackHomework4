@@ -197,12 +197,13 @@ $(document).ready(function(){
     function submitFunction(){    
         if($('#firstElement, #secondElement, #thirdElement, #fourthElement').hasClass('list-group-item active')){
             //do stuff to log if answer was correct etc or subtract time
-            let gotItCorrect = false;
+            
             if(checkAnswer(answerSelected)==='correctAnswer'){
-                gotItCorrect = true;
-                // console.log("They got it correct");
+                movePercent('correct'); 
+                
             }
             else{
+                movePercent('wrong');
                 // console.log("wrong");
             }
             ifAnAnswerSelectedThenUnselect();
@@ -217,6 +218,22 @@ $(document).ready(function(){
         }
     }
 
+    var numberCorrect = 0;
+    var numberWrong = 0;
+    function movePercent(correctness){
+        if(correctness === 'correct'){
+            numberCorrect++;
+        }
+        else if(correctness === 'wrong'){
+            numberWrong++;
+        }
+        percentTracker = (numberCorrect/(numberCorrect+numberWrong))*100;
+        percentTracker = parseFloat(percentTracker.toFixed(1));
+        $('#percentTracker').text('Percent: ' + percentTracker + "%");
+    }
+
+    //double rounding is okay for now, but this should be changed later for best practice
+    //do operations and round last to minimize floating point round-off
     function moveProgressBar(){
         progressWidth+=(Math.round((1/questions.length)*1000))/10;
         progressWidth = parseFloat(progressWidth.toFixed(3));//using toFixed() because if the array changes size it might not be a nice answer
