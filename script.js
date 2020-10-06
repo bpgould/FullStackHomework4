@@ -292,7 +292,7 @@ $(document).ready(function(){
     
     var addedTime = 0;
     function addTime(){
-        addedTime+=10000;
+        addedTime+=10000; //adds 10 seconds
     }
     
     var startTime;
