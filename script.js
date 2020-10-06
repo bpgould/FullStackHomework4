@@ -87,15 +87,15 @@
         questions[counter]=x;
         counter++;
     }
-
-$(document).ready(function(){
-    
+//shorthand for document.ready
+$(function(){
     //Start the quiz button triggers the first painting of a random question with answer choices and event listeners to interact with the quiz taker
     //No reason to load this on the front end HTML since the user may just be checking the leaderboard and not taking the quiz
     
     var percentTracker = 0.0;
     $("#startQuizButton").click(function(){
         $("#hiddenOncePlayed").css('display','none');
+        
         jQuery('<div/>',{
             id: 'quizContent'
         }).appendTo('#mainTextArea');
@@ -115,6 +115,7 @@ $(document).ready(function(){
         jQuery('<div/>',{
             id: 'percentTracker'
         }).appendTo('#quizContent');
+        
         $('#percentTracker').text('Percent: ' + percentTracker + "%").css('color','green');
 
         jQuery('<div/>',{
@@ -199,15 +200,12 @@ $(document).ready(function(){
     function submitFunction(){    
         if($('#firstElement, #secondElement, #thirdElement, #fourthElement').hasClass('list-group-item active')){
             //do stuff to log if answer was correct etc or subtract time
-            
             if(checkAnswer(answerSelected)==='correctAnswer'){
                 movePercent('correct'); 
-                
             }
             else{
                 movePercent('wrong');
                 addTime();
-                // console.log("wrong");
             }
             ifAnAnswerSelectedThenUnselect();
             moveProgressBar();
@@ -296,12 +294,9 @@ $(document).ready(function(){
             }
         return x;
     }
-    //TODO: tried clearInterval, tried with Window.setInterval() and Window.clearInterval(), etc.
-    // var tInterval = setInterval(getShowTime, 1000);
     //https://www.w3schools.com/jsref/met_win_setinterval.asp
     
     function pauseTime(){
-        // Window.clearInterval(tInterval);
         console.log('tInterval: ', tInterval);
         clearInterval(tInterval);
     }
