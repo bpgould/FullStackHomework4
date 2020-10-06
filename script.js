@@ -89,6 +89,7 @@ $(document).ready(function(){
         counter++;
     }
     //Start the quiz button triggers the first painting of a random question with answer choices and event listeners to interact with the quiz taker
+    //No reason to load this on the front end HTML since the user may just be checking the leaderboard and not taking the quiz
     $("#startQuizButton").click(function(){
         $("#hiddenOncePlayed").css('display','none');
         jQuery('<div/>',{
@@ -98,6 +99,16 @@ $(document).ready(function(){
         jQuery('<div/>',{
             id: 'timer'
         }).appendTo('#quizContent');
+
+        jQuery('<div/>',{
+            id: 'progressBar',
+            class: 'progress'
+        }).appendTo('#quizContent');//physical indicator of progress
+
+        var progressWidth=0;
+        $('#progressBar').append("<div class='progress-bar' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width:0%'>0%</div>");
+        $('.progress-bar').css('width',progressWidth + '%');
+        // $('.progress-bar').text('10%');
 
         jQuery('<div/>',{
             id: 'questionSpace'
@@ -149,6 +160,7 @@ $(document).ready(function(){
         }
     });
     
+    //toggleClass doesn't seem to work sometimes so I used a more verbose method below
     function ifAnAnswerSelectedThenUnselect(){
         if($('#firstElement').hasClass('list-group-item active')){
             $('#firstElement').removeClass('list-group-item active');

@@ -13,7 +13,12 @@
 /* override default Bootstrap list style with traditional alphabetical style */
 /* need to fix to add letters via upper-alpha */
 .list-group{
-    list-style: upper-alpha;
     margin-left: 3rem !important;
     margin-right:3rem !important;
+}
+#progressBar{
+    margin-left: 3rem !important;
+    margin-right:3rem !important;
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
 }
