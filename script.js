@@ -205,7 +205,7 @@ $(document).ready(function(){
             moveProgressBar();
             populateQuiz();
         }
-        else{
+        else if($('#errorSubmit').length === 0){
             $('#listContent').append(
                 '<li id="errorSubmit" class="list-group-item">Please Select An Answer!</li>'
             );
@@ -261,9 +261,9 @@ $(document).ready(function(){
 
     }
     function giveRandomQuestion(){
-        let x = Math.floor(Math.random() * 20); 
+        let x = Math.floor(Math.random() * questions.length); 
             while(chosenQuestions.includes(x)===true){
-                x = Math.floor(Math.random() * 20);  
+                x = Math.floor(Math.random() * questions.length);  
             }
         return x;
     }
