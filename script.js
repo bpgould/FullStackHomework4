@@ -135,6 +135,7 @@ $(document).ready(function(){
     //much easier to track selected answer at click rather than submit
     var answerSelected;
     $(document).on('click','#firstElement, #secondElement, #thirdElement, #fourthElement', function(){
+        ifAnAnswerSelectedThenUnselect();
         if($(this).attr('class')==='list-group-item active'){
             answerSelected = null;
             $(this).removeClass('list-group-item active');
@@ -147,9 +148,29 @@ $(document).ready(function(){
         $('#errorSubmit').remove();
         }
     });
+    
+    function ifAnAnswerSelectedThenUnselect(){
+        if($('#firstElement').hasClass('list-group-item active')){
+            $('#firstElement').removeClass('list-group-item active');
+            $('#firstElement').addClass('list-group-item');
+        }
+        if($('#secondElement').hasClass('list-group-item active')){
+            $('#secondElement').removeClass('list-group-item active');
+            $('#secondElement').addClass('list-group-item');
+        }
+        if($('#thirdElement').hasClass('list-group-item active')){
+            $('#thirdElement').removeClass('list-group-item active');
+            $('#thirdElement').addClass('list-group-item');
+        }
+        if($('#fourthElement').hasClass('list-group-item active')){
+            $('#fourthElement').removeClass('list-group-item active');
+            $('#fourthElement').addClass('list-group-item');
+        }
+    }
+
     //TODO: need to unbind from document, cannot get any other binding method to work
     $(document).on('click','#submit',function(){
-        $(submitFunction());
+        submitFunction();
     });
     // $('#textContent').on('click', '#submit', function(){
     //     $(submitFunction());
@@ -167,7 +188,7 @@ $(document).ready(function(){
             else{
                 // console.log("wrong");
             }
-            unselectAnswers();
+            ifAnAnswerSelectedThenUnselect();
             populateQuiz();
         }
         else{
@@ -224,15 +245,6 @@ $(document).ready(function(){
                 x = Math.floor(Math.random() * 20);  
             }
         return x;
-    }
-
-    function unselectAnswers(){
-       //target selected answer and unselect it before first paint of next question
-        
-    //    let idSelected = answerSelected.attr('id');
-    //     $(idSelected).removeClass('list-group-item active');
-    //     $(idSelected).addClass('list-group-item');
-       
     }
     
     var startTime;
