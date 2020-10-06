@@ -263,14 +263,17 @@ $(document).ready(function(){
     function populateQuiz(){
         //random question from array of questions that way students can't cheat as easily, hard coded for 20 questions
         console.log(chosenQuestions); 
+
         if(chosenQuestions.length<questions.length){
         randomQ = giveRandomQuestion();
         chosenQuestions.push(randomQ);
         }
         else{
+            //this indicates end of the quiz
+            pauseTime();
             $('#submit').remove();
             $('#listContent').append(
-                '<li id="endOfQuiz" class="list-group-item">That&#146s all for now!</li>'
+                '<li id="endOfQuiz" class="list-group-item">That&#146s all for now!</li>'//wird HTML comma code
             );
             $('#endOfQuiz').css({'color':'purple', 'font-size':'120%', 'font-weight': 'bold'});
         }      
@@ -289,7 +292,11 @@ $(document).ready(function(){
             }
         return x;
     }
-    
+    //TODO: tried clearInterval, tried with Window.setInterval() and Window.clearInterval(), etc.
+    function pauseTime(){
+        
+    }
+
     var addedTime = 0;
     function addTime(){
         addedTime+=10000; //adds 10 seconds

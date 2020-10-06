@@ -22,3 +22,5 @@ there is a percentage tracker,
 I used objects for the question/answer data,
 I used modals for the leaderboard + about pages,
 and the UI is built to handle most, if not all, user errors
+
+TODO: fix pauseTime(), sort then store score in LocalStorage
