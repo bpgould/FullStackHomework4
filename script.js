@@ -29,7 +29,7 @@ $(document).ready(function(){
         true, false, false, false,
         false, true, false, false,
         false, true, false, false,//question 5
-        false, false, true, false,
+        false, false, false, true,
         true, false, false, false,
         false, false, true, false,
         false, true, false, false,
@@ -204,6 +204,7 @@ $(document).ready(function(){
             }
             else{
                 movePercent('wrong');
+                addTime();
                 // console.log("wrong");
             }
             ifAnAnswerSelectedThenUnselect();
@@ -289,16 +290,22 @@ $(document).ready(function(){
         return x;
     }
     
+    var addedTime = 0;
+    function addTime(){
+        addedTime+=10000;
+    }
+    
     var startTime;
     function startTimer(){
         startTime = new Date();
-        setInterval(getShowTime, 1000);
+        setInterval(getShowTime, 1000); //Question: why does it stop working when I use get ShowTime()?
     }
 
     function getShowTime(){
         let updatedTime = new Date();
         let difference =  updatedTime - startTime;
-        
+        difference = difference + addedTime;
+
         let hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         let minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
         let seconds = Math.floor((difference % (1000 * 60)) / 1000);
