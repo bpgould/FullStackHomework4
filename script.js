@@ -60,6 +60,7 @@
                 counterZ++;
             }
         }
+        //assigning truth values to answer choices
         for(i=0; i<answerKey.length; i++){
             answers[i].isCorrect = answerKey[i];
         }
@@ -95,11 +96,12 @@ $(function(){
     var percentTracker = 0.0;
     $("#startQuizButton").click(function(){
         $("#hiddenOncePlayed").css('display','none');
-        
+        //jQuery.something ~~ $.something
         jQuery('<div/>',{
             id: 'quizContent'
         }).appendTo('#mainTextArea');
 
+        //TODO: fix how it jumps down when the timer paints
         jQuery('<div/>',{
             id: 'timer'
         }).appendTo('#quizContent');
@@ -126,6 +128,13 @@ $(function(){
             id: 'listContent',
             class: 'list-group'
         }).appendTo('#quizContent');
+
+        //add buttons and text field to add score to leaderboard
+        jQuery('<div/>',{
+            id: 'leaderBoardOptions',
+            class: 'container-fluid'
+        }).appendTo('#quizContent');
+        
 
         $('#listContent').append(
             '<li id="firstElement" class="list-group-item"></li>'
@@ -192,9 +201,6 @@ $(function(){
     $(document).on('click','#submit',function(){
         submitFunction();
     });
-    // $('#textContent').on('click', '#submit', function(){
-    //     $(submitFunction());
-    // });
     // $('#submit').on('click', submitFunction());
         
     function submitFunction(){    
@@ -272,12 +278,12 @@ $(function(){
         else{
             //this indicates end of the quiz
             pauseTime();
-            
             $('#submit').remove();
             $('#listContent').append(
                 '<li id="endOfQuiz" class="list-group-item">That&#146s all for now!</li>'//wird HTML comma code
             );
             $('#endOfQuiz').css({'color':'purple', 'font-size':'120%', 'font-weight': 'bold'});
+            //add to leaderboard option
         }      
 
         $('#questionSpace').text(questions[randomQ].question);
@@ -295,9 +301,7 @@ $(function(){
         return x;
     }
     //https://www.w3schools.com/jsref/met_win_setinterval.asp
-    
     function pauseTime(){
-        console.log('tInterval: ', tInterval);
         clearInterval(tInterval);
     }
 
@@ -316,7 +320,7 @@ $(function(){
     function getShowTime(){
         let updatedTime = new Date();
         let difference =  updatedTime - startTime;
-        difference = difference + addedTime;
+        difference = difference + addedTime; //allows to add time penalty
 
         let hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         let minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
